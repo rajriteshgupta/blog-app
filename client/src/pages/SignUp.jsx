@@ -39,7 +39,7 @@ export default function SignUp() {
   }
   return (
     <div className="min-h-screen mt-20">
-      <div className='flex max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
+      <div className='flex p-3 max-w-3xl mx-auto flex-col md:flex-row md:items-center gap-5'>
         {/* Left Div */}
         <div className='flex-1'>
           <Link
@@ -60,7 +60,7 @@ export default function SignUp() {
           <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
             <div>
               <Label value="Username" />
-              <TextInput type='text' id='username' onChange={handleChange} />
+              <TextInput type='text' placeholder='username' id='username' onChange={handleChange} />
             </div>
             <div>
               <Label value="Email" />
@@ -68,7 +68,7 @@ export default function SignUp() {
             </div>
             <div>
               <Label value="Password" />
-              <TextInput type='password' id='password' onChange={handleChange} />
+              <TextInput type='password'placeholder='**********' id='password' onChange={handleChange} />
             </div>
             <Button gradientDuoTone='purpleToPink' type='submit'>Sign Up</Button>
           </form>
