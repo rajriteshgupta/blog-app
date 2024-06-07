@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, FooterCopyright } from "flowbite-react";
+import { Footer } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { BsFacebook, BsInstagram, BsTwitterX, BsGithub } from "react-icons/bs";
 
