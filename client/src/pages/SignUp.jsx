@@ -70,11 +70,7 @@ export default function SignUp() {
               <Label value="Password" />
               <TextInput type='password'placeholder='**********' id='password' onChange={handleChange} />
             </div>
-            <Button gradientDuoTone='purpleToPink' type='submit'>Sign Up</Button>
-          </form>
-          <div className='flex gap-2 text-sm mt-5'>
-            <span>Have an account?</span>
-            <Link to='/sign-in' className='text-blue-500'>
+            <Button gradientDuoTone='purpleToPink' type='submit'>
               {
                 loading ? (
                   <>
@@ -85,7 +81,11 @@ export default function SignUp() {
                   'Sign Up'
                 )
               }
-            </Link>
+            </Button>
+          </form>
+          <div className='flex gap-2 text-sm mt-5'>
+            <span>Have an account?</span>
+            <Link to='/sign-in' className='text-blue-500'>Sign In</Link>
           </div>
           {
             errorMessage && (
