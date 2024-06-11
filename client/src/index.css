@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  height: 100vh;
+}
+
+.ql-editor {
+  font-size: 1.05rem;
+}
+.ql-toolbar {
+  border-radius: 0.5rem 0.5rem 0 0;
+  background-color: #efefef;
+}
+.ql-container {
+  border-radius: 0 0 0.5rem 0.5rem;
+  background-color: #f9fafb;
+}

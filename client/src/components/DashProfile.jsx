@@ -2,7 +2,8 @@ import { Alert, Button, Modal, TextInput } from 'flowbite-react';
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from 'firebase/storage';
-import { HiOutlineExclamationCircle } from 'react-icons/hi'
+import { HiOutlineExclamationCircle } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 import { app } from '../firebase';
 import {
@@ -206,6 +207,13 @@ export default function DashProfile() {
         <Button type="submit" gradientDuoTone="purpleToBlue" outline disabled={loading || imageUploading}>
           {loading ? 'Loading...' : 'Update'}
         </Button>
+        {
+          currentUser.isAdmin && (
+            <Link to={'/create-post'}>
+              <Button type='button' gradientDuoTone='purpleToPink' className='w-full'>Create Post</Button>
+            </Link>
+          )
+        }
       </form>
       <div className="text-red-500 font-semibold flex justify-between mt-3">
         <span className="cursor-pointer" onClick={() => setShowModal(true)}>
