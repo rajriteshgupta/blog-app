@@ -93,6 +93,7 @@ export default function CreatePost() {
             <option value="typescript">TypeScript</option>
             <option value="react">React</option>
             <option value="angular">Angular</option>
+            <option value="others">Others</option>
           </Select>
         </div>
         <div
