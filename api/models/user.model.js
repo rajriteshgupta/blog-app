@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
     },
     profilePicture: {
         type: String,
-        default: "https://firebasestorage.googleapis.com/v0/b/blog-app-1f895.appspot.com/o/DefaultProfile.jpg?alt=media&token=b033fcfe-6c4e-402b-a4eb-832f836eeea8"
+        default: "https://firebasestorage.googleapis.com/v0/b/blog-app-1f895.appspot.com/o/DefaultProfile.jpg?alt=media"
     },
     isAdmin: {
         type: Boolean,
