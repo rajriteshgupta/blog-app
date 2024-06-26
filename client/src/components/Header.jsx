@@ -82,7 +82,7 @@ export default function Header() {
               onChange={(e)=>setSearchTerm(e.target.value)}
             />
           </form>
-          <Button className="h-6 w-6 hidden sm:inline-flex items-center lg:hidden" onClick={()=>setShowSearchbox(false)} color="gray" pill>
+          <Button className="h-6 w-6 items-center lg:hidden" onClick={()=>setShowSearchbox(false)} color="gray" pill>
             <RxCross2 />
           </Button>
         </>
@@ -94,7 +94,7 @@ export default function Header() {
           </Button>
         )}
         <Button
-          className="w-12 h-10 inline"
+          className="w-12 h-10 hidden sm:inline"
           color="gray"
           pill
           onClick={() => dispatch(toggleTheme())}
@@ -132,19 +132,22 @@ export default function Header() {
       </div>
       <Navbar.Collapse>
         {!currentUser && (
-          <Link className='sm:hidden' to="/sign-in" as={"div"}>
-            <Navbar.Link active={path === "/sign-in"}>Sign In</Navbar.Link>
+          <Link className='sm:hidden' to="/sign-in">
+            <Navbar.Link active={path === "/sign-in"} as={"div"}>Sign In</Navbar.Link>
           </Link>
         )}
-        <Link to="/" as={"div"}>
-          <Navbar.Link active={path === "/"}>Home</Navbar.Link>
+        <Link to="/">
+          <Navbar.Link active={path === "/"} as={"div"}>Home</Navbar.Link>
         </Link>
-        <Link to="/about" as={"div"}>
-          <Navbar.Link active={path === "/about"}>About</Navbar.Link>
+        <Link to="/about">
+          <Navbar.Link active={path === "/about"} as={"div"}>About</Navbar.Link>
         </Link>
-        <Link to="/projects" as={"div"}>
-          <Navbar.Link active={path === "/projects"}>Projects</Navbar.Link>
+        <Link to="/projects">
+          <Navbar.Link active={path === "/projects"} as={"div"}>Projects</Navbar.Link>
         </Link>
+        <Navbar.Link className='sm:hidden' onClick={() => dispatch(toggleTheme())}>
+          { theme === 'light' ? "Dark Mode" : "Light Mode" }
+        </Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
   );
