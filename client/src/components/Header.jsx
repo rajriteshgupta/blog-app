@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Avatar, Button, Dropdown, DropdownHeader, DropdownItem, Navbar, TextInput } from 'flowbite-react';
+import { Avatar, Button, Dropdown, Navbar, TextInput } from 'flowbite-react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaMoon, FaSun } from 'react-icons/fa';
+import { RxCross2 } from 'react-icons/rx';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { toggleTheme } from '../redux/theme/themeSlice';
@@ -16,6 +17,7 @@ export default function Header() {
   const { currentUser } = useSelector(state => state.user);
   const { theme } = useSelector(state => state.theme);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showSearchbox, setShowSearchbox] = useState(false);
   useEffect(()=>{
     const urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
@@ -45,6 +47,7 @@ export default function Header() {
     urlParams.set('searchTerm', searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
+    setShowSearchbox(false);
   }
   return (
     <Navbar className="border-b-2">
@@ -57,7 +60,7 @@ export default function Header() {
         </span>
         Blog
       </Link>
-      <form onSubmit={handleSubmit}>
+      <form className='lg:w-72' onSubmit={handleSubmit}>
         <TextInput
           type="text"
           placeholder="Search..."
@@ -67,10 +70,29 @@ export default function Header() {
           onChange={(e)=>setSearchTerm(e.target.value)}
         />
       </form>
-      <Button className="h-10 w-12 lg:hidden" color="gray" pill>
-        <AiOutlineSearch />
-      </Button>
+      {showSearchbox && (
+        <>
+          <form className='max-w-40 sm:max-w-52 md:max-w-60' onSubmit={handleSubmit}>
+            <TextInput
+              type="text"
+              placeholder="Search..."
+              rightIcon={AiOutlineSearch}
+              className="inline lg:hidden"
+              value={searchTerm}
+              onChange={(e)=>setSearchTerm(e.target.value)}
+            />
+          </form>
+          <Button className="h-6 w-6 hidden sm:inline-flex items-center lg:hidden" onClick={()=>setShowSearchbox(false)} color="gray" pill>
+            <RxCross2 />
+          </Button>
+        </>
+      )}
       <div className="flex gap-2 md:order-2">
+        {!showSearchbox && (
+          <Button className="h-10 w-12 p-1 lg:hidden" onClick={()=>setShowSearchbox(true)} color="gray" pill>
+            <AiOutlineSearch />
+          </Button>
+        )}
         <Button
           className="w-12 h-10 inline"
           color="gray"
@@ -100,7 +122,7 @@ export default function Header() {
             <Dropdown.Item onClick={handleSignout}>Sign out</Dropdown.Item>
           </Dropdown>
         ) : (
-          <Link to="/sign-in">
+          <Link className='hidden sm:inline' to="/sign-in">
             <Button gradientDuoTone="purpleToBlue" outline>
               Sign In
             </Button>
@@ -109,15 +131,20 @@ export default function Header() {
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
-        <Navbar.Link active={path === "/"} as={"div"}>
-          <Link to="/">Home</Link>
-        </Navbar.Link>
-        <Navbar.Link active={path === "/about"} as={"div"}>
-          <Link to="/about">About</Link>
-        </Navbar.Link>
-        <Navbar.Link active={path === "/projects"} as={"div"}>
-          <Link to="/projects">Projects</Link>
-        </Navbar.Link>
+        {!currentUser && (
+          <Link className='sm:hidden' to="/sign-in" as={"div"}>
+            <Navbar.Link active={path === "/sign-in"}>Sign In</Navbar.Link>
+          </Link>
+        )}
+        <Link to="/" as={"div"}>
+          <Navbar.Link active={path === "/"}>Home</Navbar.Link>
+        </Link>
+        <Link to="/about" as={"div"}>
+          <Navbar.Link active={path === "/about"}>About</Navbar.Link>
+        </Link>
+        <Link to="/projects" as={"div"}>
+          <Navbar.Link active={path === "/projects"}>Projects</Navbar.Link>
+        </Link>
       </Navbar.Collapse>
     </Navbar>
   );
